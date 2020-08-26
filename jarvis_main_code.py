@@ -4,7 +4,69 @@ import sys
 import time 
 import webbrowser
 import wikipedia
+import random
+joke=[
+    """1 ...... What do you call a dinosaur that is sleeping? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    A dino-snore!""",
 
+    """2 ...... What is fast, loud and crunchy? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    A rocket chip!""",
+
+    """3 ...... Why did the teddy bear say no to dessert? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    Because she was stuffed.""",
+
+    """4 ...... What has ears but cannot hear? , ,  , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    A cornfield.""",
+
+    """5 ...... What did the left eye say to the right eye? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    Between us, something smells!""",
+
+    """6 ...... What do you get when you cross a vampire and a snowman? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    Frost bite!""",
+
+    """7 ...... What did one plate say to the other plate? , ,  , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    Dinner is on me!""",
+
+    """8 ...... Why did the student eat his homework? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    Because the teacher told him it was a piece of cake!""",
+
+    """9 ...... When you look for something, why is it always in the last place you look? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    Because when you find it, you stop looking.""",
+
+    """10 ...... What is brown, hairy and wears sunglasses? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+    A coconut on vacation."""
+]
+riddles=[
+    """1. Riddle: What has to be broken before you can use it?
+    Answer: An egg""",
+
+    """2. Riddle: I’m tall when I’m young, and I’m short when I’m old. What am I?
+    Answer: A candle""",
+
+    """3. Riddle: What month of the year has 28 days?
+    Answer: All of them""",
+
+    """4. Riddle: What is full of holes but still holds water?
+    Answer: A sponge""",
+
+    """5. Riddle: What question can you never answer yes to?
+    Answer: Are you asleep yet?""",
+
+    """6. Riddle: What is always in front of you but can’t be seen?
+    Answer: The future""",
+
+    """7. Riddle: There’s a one-story house in which everything is yellow. Yellow walls, yellow doors, yellow furniture. What color are the stairs?
+    Answer: There aren’t any—it’s a one-story house.""",
+
+    """8. Riddle. What can you break, even if you never pick it up or touch it?
+    Answer: A promise""",
+
+    """9. Riddle: What goes up but never comes down?
+    Answer: Your age""",
+
+    """10. Riddle: A man who was outside in the rain without an umbrella or hat didn’t get a single hair on his head wet. Why?
+    Answer: He was bald."""
+]
 Jarvis = pyt.init()
 Jarvis.say("Hello There")
 Jarvis.runAndWait()
@@ -44,7 +106,10 @@ Jarvis.say(greet)
 Jarvis.runAndWait()
 x=d=0
 while True:
-    ask_q = (name,"What may i help you with : ")
+    if name == "no":
+        ask_q = ("What may i help you with : ")
+    else:
+        ask_q = (name,"What may i help you with : ")
     Jarvis.say(ask_q)
     Jarvis.runAndWait()
     ans = input("Enter A Command \n<^-^> ")
@@ -52,6 +117,15 @@ while True:
         Jarvis.say("Ok bye")
         Jarvis.runAndWait()
         sys.exit(0)
+    elif 'type<' in ans:
+        if '>' in ans :
+            ans = ans.replace("type<","")
+            ans = ans.replace(">","")
+            print(ans)
+    elif 'clear<>' in ans:
+        Jarvis.say("Ok Clearing")
+        Jarvis.runAndWait()        
+        os.system('cls')
     elif 'speak' in ans:
         ans=ans.replace("speak ","")
         Jarvis.say(ans)
@@ -106,9 +180,29 @@ while True:
         webbrowser.open("youtube.com")
     elif 'open google' in ans :
         webbrowser.open("google.com")
-    elif 'open ppt' in ans:
-        ppt = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
-        os.startfile(ppt)
+    elif 'open' in ans:
+        if 'ppt' in ans :
+            ppt = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
+            os.startfile(ppt)
+        elif 'python' in ans:
+            Jarvis.say("Which python code do you want to open ?")
+            Jarvis.runAndWait()
+            py = int(input("1 IDLE 3.7 - 32 bit\n2 3.7 - 32 bit\n3 Doc's 3.7 - 32 bit\n4 IDLE 3.6 - 32 bit\n5 3.6 - 32 bit\n6 Doc's 3.6 - 32 bit\n<^-^> "))
+            if py == 1:              
+                py1 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+                os.startfile(py1)
+            elif py == 2:
+                py2 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+                os.startfile(py2)
+            elif py == 3:
+                py3 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe -m pydoc -b"
+                os.startfile(py3)
+            elif py == 4:
+                py4 = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe" 
+                os.startfile(py4)
+            elif py == 5:
+                py5 = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe" 
+                os.startfile(py5)
     elif 'open chrome' in ans:
         chrome = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         os.startfile(chrome)
@@ -150,6 +244,21 @@ while True:
             Jarvis.runAndWait()
             print("I have no answer to that question")
         d=d+1
+    elif 'tell' in ans and 'joke' in ans:
+        io = 1
+        jokes = random.choice(joke)
+        Jarvis.say(jokes)
+        Jarvis.runAndWait()
+    elif 'riddle' in ans:
+        io = 1
+        jokes = random.choice(riddles)
+        Jarvis.say(jokes)
+        Jarvis.runAndWait()
+    elif '*-'in ans and "-*" in ans :
+        ans = ans.replace("*-","")
+        ans = ans.replace("-*","")
+        hi = ans.upper()
+        print(hi)
     else:
         Jarvis.say("invalid command")
         Jarvis.runAndWait()
@@ -163,8 +272,5 @@ while True:
             Jarvis.say(" Ok.. Acording to the net this is what i found !!")
             Jarvis.runAndWait()
         else:
-            sp = ("Ok also try out this : quit ,tell the time,what is your name,can you open youtube,open google,open ppt,open chrome,can you do some math,search (anything) \ krunker")
-            print("Ok also try out this : quit\ntell the time\nwhat is your name\ncan you open youtube\nopen google\nopen ppt\nopen chrome\ncan you do some math\nsearch (anything)\nOr\nkrunker")
-            Jarvis.say(sp)
-            Jarvis.runAndWait()
+            h=1
 # The End :)
