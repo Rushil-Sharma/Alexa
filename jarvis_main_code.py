@@ -5,6 +5,7 @@ import time
 import webbrowser
 import wikipedia
 import random
+import smtplib
 joke=[
     """1 ...... What do you call a dinosaur that is sleeping? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
     A dino-snore!""",
@@ -67,6 +68,13 @@ riddles=[
     """10. Riddle: A man who was outside in the rain without an umbrella or hat didn’t get a single hair on his head wet. Why?
     Answer: He was bald."""
 ]
+def send(to,content):
+    server = smtplib.SMTP('smtp.gmail.com')
+    server.ehlo()
+    server.starttls()
+    server.login('barchepurva1@gmail.com','Microsoft!1')
+    server.sendemail('barchepurva1@gmail.com',to,content)
+    server.close()
 Jarvis = pyt.init()
 Jarvis.say("Hello There")
 Jarvis.runAndWait()
@@ -104,7 +112,9 @@ name = input("Can you please enter your name :  ")
 greet=("Hi",name)
 Jarvis.say(greet)
 Jarvis.runAndWait()
+Jarvis_name = 'Jarvis'
 x=d=0
+print("Enter A Command or type index<> for all the commands :")
 while True:
     if name == "no":
         ask_q = ("What may i help you with : ")
@@ -112,16 +122,23 @@ while True:
         ask_q = (name,"What may i help you with : ")
     Jarvis.say(ask_q)
     Jarvis.runAndWait()
-    ans = input("Enter A Command \n<^-^> ")
+    ans = input("<^-^> ")
     if 'quit' in ans:
         Jarvis.say("Ok bye")
         Jarvis.runAndWait()
         sys.exit(0)
+    elif 'index<>' in ans:
+        print("type<type anything here>\nclear<> : to clear the screen\ngo to (any website)\nplay (some) song\nsearch (anything here)\nchange your voice\nriddle me !\ntell me a joke\nhey what is the time ?\nopen ppt app\nopen python\ncan you do some math\n\n\n\n")
     elif 'type<' in ans:
         if '>' in ans :
             ans = ans.replace("type<","")
             ans = ans.replace(">","")
             print(ans)
+    elif 'change' in ans and 'name' in ans:
+        if 'your' in ans:
+            Jarvis_name = input("Enter a good name for me : ")
+        elif 'my' in ans:
+            name = input("Enter a good name for yourself : ")
     elif 'clear<>' in ans:
         Jarvis.say("Ok Clearing")
         Jarvis.runAndWait()        
@@ -174,7 +191,8 @@ while True:
         Jarvis.say(time_now)
         Jarvis.runAndWait()
     elif 'your name' in ans:
-        Jarvis.say("I am jarvis your persional assistent")
+        J_n = ("I am",Jarvis_name,"You can also change my voice by the command : change your name and also change your name by the command : chsnge my name ")
+        Jarvis.say(J_n)
         Jarvis.runAndWait()
     elif 'open youtube' in ans :
         webbrowser.open("youtube.com")
@@ -259,6 +277,25 @@ while True:
         ans = ans.replace("-*","")
         hi = ans.upper()
         print(hi)
+    elif 'send email to mom' in ans :
+        try :
+            Jarvis.say("What should i say ? ")
+            Jarvis.runAndWait()
+            content = input("Enter : ")
+            to = "barchepurva@gmail.com"
+            send(to,content)
+            Jarvis.say("Email sent")
+            Jarvis.runAndWait()
+        except Exception as e:
+            print(e)
+            Jarvis.say("""The term 'Send' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the 
+            name, or if a path was included, verify that the path is correct and try again.
+            At line:1 char:1
+            + Send email
+            + ~~
+                + CategoryInfo          : ObjectNotFound: (ww:String) [], CommandNotFoundException
+                + FullyQualifiedErrorId : CommandNotFoundException
+            What i mean is it is an error my boyy""")
     else:
         Jarvis.say("invalid command")
         Jarvis.runAndWait()
