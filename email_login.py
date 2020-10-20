@@ -1,6 +1,16 @@
 from tkinter import *
 import pyttsx3 as pyt
-import jarvis
+import os
+import sys 
+import time 
+import webbrowser
+import wikipedia
+import random
+import smtplib
+import Command
+import pyttsx3 as pyt
+import Alexa
+import Usernames
 Jarvis = pyt.init()
 Jarvis.say("Hello There , . I will guide you in the email login process , Please wait till we load your screen . . . .")
 Jarvis.runAndWait()
@@ -33,10 +43,15 @@ def verification():
         Jarvis.say("I think you missed the .com ")
         Jarvis.runAndWait()
     if r == 4:
-        Jarvis.say("You are verified now close this screen for safety")
-        Jarvis.runAndWait()
-        root.mainloop()
-        jarvis.main_code()
+        if x in Usernames.username :
+            Jarvis.say("You are verified now close this screen for safety")
+            Jarvis.runAndWait()
+            root.mainloop()
+            Alexa.main_code()
+        else :
+            asd = ("There are some limited usernames please try again")        
+            Jarvis.say(asd)
+            Jarvis.runAndWait()
 Submit = Button(root,text='Submit',font=('Helvatica',30),fg='grey',bg='gold',command=verification)
 Submit.grid(row=3,column=1,columnspan=2)
 Jarvis.say("Ok . . . now you can enter your email")
