@@ -8,6 +8,8 @@ import wikipedia
 import random
 import smtplib
 import Command
+import pyttsx3 as pyt
+import Usernames
 def main_code():
     joke=[
         """1 ...... What do you call a dinosaur that is sleeping? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
@@ -113,9 +115,9 @@ def main_code():
     print("Enter A Command or type index<> for all the commands :")
     while True:
         if name == "no":
-            ask_q = ("What may i help you with : ")
+            ask_q = ("Enter a command : ")
         else:
-            ask_q = (name,"What may i help you with : ")
+            ask_q = (name,"Enter a command : ")
         Jarvis.say(ask_q)
         Jarvis.runAndWait()
         ans = input("<^-^> ")
@@ -146,11 +148,37 @@ def main_code():
             Jarvis.say(ans)
             Jarvis.runAndWait()
         elif 'go to' in ans:
-            Command.Go_To()
+            Jarvis.say("searching......")
+            Jarvis.runAndWait()
+            ans = ans.replace("go to ","")
+            xyz = ("Enter some thing like ('.com','.io','.in'etc):")
+            Jarvis.say(xyz)
+            Jarvis.runAndWait()
+            some = input("Enter some thing like ('.com','.io','.in'etc):")
+            key = (f"https://www.{ans}{some}")
+            webbrowser.open(key)
+            Jarvis.say("Acording to the microsoft edge this is what i found !!")
+            Jarvis.runAndWait()
+            input("Press enter to continue :")
         elif 'play' in ans and 'song' in ans:
-            Command.Play_Song()
+            Jarvis.say("searching......")
+            Jarvis.runAndWait()
+            ans = ans.replace("play","")
+            ans = ans.replace("song","")
+            key = (f"https://www.youtube.com/results?search_query={ans}+song")
+            webbrowser.open(key)
+            Jarvis.say("Acording to the net this is what i found !!")
+            Jarvis.runAndWait()
+            input("Press enter to continue :")
         elif 'search' in ans:
-            Command.Search()
+            Jarvis.say("searching......")
+            Jarvis.runAndWait()
+            ans = ans.replace("search","")
+            key = (f"https://www.google.com/search?q={ans}")
+            webbrowser.open(key)
+            Jarvis.say("Acording to the net this is what i found !!")
+            Jarvis.runAndWait()
+            input("Press enter to continue :")
         elif 'change voice' in ans :
             Command.Change_voice()
         elif 'time' in ans:
@@ -183,7 +211,55 @@ def main_code():
             jokes = random.choice(riddles)
             Jarvis.say(jokes)
             Jarvis.runAndWait()
+           if 'ppt' in ans :
+        ppt = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
+        os.startfile(ppt)
+        elif 'python' in ans:
+            Jarvis.say("Which python code do you want to open ?")
+            Jarvis.runAndWait()
+            py = int(input("1 IDLE 3.7 - 32 bit\n2 3.7 - 32 bit\n3 Doc's 3.7 - 32 bit\n4 IDLE 3.6 - 32 bit\n5 3.6 - 32 bit\n6 Doc's 3.6 - 32 bit\n<^-^> "))
+            if py == 1:              
+                py1 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+                os.startfile(py1)
+            elif py == 2:
+                py2 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+                os.startfile(py2)
+            elif py == 3:
+                py3 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe -m pydoc -b"
+                os.startfile(py3)
+            elif py == 4:
+                py4 = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe" 
+                os.startfile(py4)
+            elif py == 5:
+                py5 = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe" 
+                os.startfile(py5)
+        elif 'open chrome' in ans:
+            chrome = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            os.startfile(chrome)
         elif 'image.open<' in ans and '>' in ans :
-            Command.Image_Open()
+            ans=ans.replace('image.open<','')   
+            ans=ans.replace('>','')
+            Jarvis.say("OK this might take a few moments")
+            Jarvis.runAndWait()
+            try :
+                root = Tk()
+                image_name = PhotoImage(file=ans)
+                Button(root,image=image_name).pack()
+                root.mainloop()
+            except Exception as e :
+                Jarvis.say(e)
+                Jarvis.runAndWait()
         else:   
-            Command.Invalid()
+            Jarvis.say("invalid command")
+            Jarvis.runAndWait()
+            print("Sorry i can not do that")
+            Jarvis.say("Should i search this on the net ?")
+            Jarvis.runAndWait()
+            y_n = input("{y/n} : ")
+            if y_n == "y":
+                key = (f"https://www.google.com/search?q={ans}")
+                webbrowser.open(key)
+                Jarvis.say(" Ok.. Acording to the net this is what i found !!")
+                Jarvis.runAndWait()
+            else:
+                h=1
