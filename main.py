@@ -19,29 +19,13 @@ Lbl1 = Label(root,text='Email :',font=('Helvatica',30))
 Lbl1.grid(row=1,column=1)
 Email = Entry(root,font=('Helvatica',30))
 Email.grid(row=1,column=2)
-def verification():
+def verification():    
     x = (Email.get())
     r = 0
-    if '.' in x:
-        r=r+1
+    if '@gmail.com' in x:
+        r=4
     else:
-        Jarvis.say("I think you missed the 'dot' ")
-        Jarvis.runAndWait()
-    if '@' in x:
-        r=r+1
-    else:
-        Jarvis.say("I think you missed the at the rate symbol ")
-        Jarvis.runAndWait()
-    if 'gmail' in x:
-        r=r+1
-    else:
-        Jarvis.say("Put a gmail or yahoo")
-        Jarvis.runAndWait()
-    if 'com' in x:
-        r = r + 1
-    else:
-        Jarvis.say("I think you missed the .com ")
-        Jarvis.runAndWait()
+        print('invalid  ')
     if r == 4:
         if x in Usernames.username :
             Jarvis.say("You are verified now close this screen for safety")
