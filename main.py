@@ -1,16 +1,21 @@
 from tkinter import *
+from tkinter import messagebox
 import pyttsx3 as pyt
 import os
 import sys 
 import time 
 import webbrowser
 import wikipedia
+import sqlite3
 import random
 import smtplib
 import Command
 import pyttsx3 as pyt
 import Alexa
 import Usernames
+conn = sqlite3.connect('username.db')
+c = conn.cursor()
+c.execute('')
 Jarvis = pyt.init()
 Jarvis.say("Hello There , . I will guide you in the email login process , Please wait till we load your screen . . . .")
 Jarvis.runAndWait()
@@ -24,18 +29,14 @@ def verification():
     r = 0
     if '@gmail.com' in x:
         r=4
+        sqliteConnection = sqlite3.connect('username.db')
+        cursor = sqliteConnection.cursor()
+        Jarvis.say("You are verified now close this screen for safety")
+        Jarvis.runAndWait()
+        root.mainloop()
+        Alexa.main_code()
     else:
-        print('invalid  ')
-    if r == 4:
-        if x in Usernames.username :
-            Jarvis.say("You are verified now close this screen for safety")
-            Jarvis.runAndWait()
-            root.mainloop()
-            Alexa.main_code()
-        else :
-            asd = ("There are some limited usernames please try again")        
-            Jarvis.say(asd)
-            Jarvis.runAndWait()
+        messagebox.askokcancel('You might have entered the wrong email','email invalid')
 Submit = Button(root,text='Submit',font=('Helvatica',30),fg='grey',bg='gold',command=verification)
 Submit.grid(row=3,column=1,columnspan=2)
 Jarvis.say("Ok . . . now you can enter your email")
