@@ -9,8 +9,8 @@ import random
 import smtplib
 import Command
 import pyttsx3 as pyt
+import jarvis
 import Usernames
-history = []
 def main_code():
     joke=[
         """1 ...... What do you call a dinosaur that is sleeping? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
@@ -78,7 +78,7 @@ def main_code():
     Jarvis.say("Hello There How are you ? I am Jarvis what should i call you ?  ")
     Jarvis.runAndWait()
     def lolololol():
-        operaton = input("type(+)or(-)or(*)or(/)or(^)) : ")
+        operaton = input("type(+)or(-)or(*)or(/)) : ")
         first = int(input("First num: "))
         second = int(input("Second num: "))
         def plus():
@@ -93,17 +93,12 @@ def main_code():
         def div():
             ans = int(first)/int(second)
             print("answer is",ans)
-        def power():
-            ans = int(first)**nt(second)
-            print("answer is",ans)            
         if operaton == "+":
             plus()
         elif operaton == "-":
             minus()
         elif operaton == "*":
             mult()
-        elif operaton == "^":
-            power()
         elif operaton == "/":
             if second != 0:
                 div()
@@ -119,7 +114,7 @@ def main_code():
     Jarvis_name = 'Jarvis'
     x=d=0
     print("Enter A Command or type index<> for all the commands :")
-    while True: 
+    while True:
         if name == "no":
             ask_q = ("Enter a command : ")
         else:
@@ -127,11 +122,14 @@ def main_code():
         Jarvis.say(ask_q)
         Jarvis.runAndWait()
         ans = input("<^-^> ")
-        history.append(ans)
         if 'quit' in ans:
             Command.Quit()
+        elif 'hi' in ans or 'hey' in ans or 'hello' in ans or 'sup' in ans:
+            print("hello i am",Jarvis_name)
+            Jarvis.say('Hello')
+            Jarvis.runAndWait()
         elif 'index<>' in ans:
-            print("change your name - Default Jarvis \nchange my name - it will be asked in start \nclear<> - clear the screen \ngo to - Will search any thing on the internet \nplay song - will search it on youtube and give you the best result \nsearch - Will search on the net \nchange voice - will change the boy voice to girl - Defalt boy \ntime - will tell the time \nopen __ App will open the app math - this will do basic math for you \nit will store the users history\nit can also tell jokes and riddles")
+            print("change your name - Default Jarvis \nchange my name - it will be asked in start \nclear<> - clear the screen \ngo to - Will search any thing on the internet \nplay song - will search it on youtube and give you the best result \nsearch - Will search on the net \nchange voice - will change the boy voice to girl - Defalt boy \ntime - will tell the time \nopen __ App will open the app math - this will do basic math for you \nit can also tell jokes and riddles")
         elif 'type<' in ans:
             if '>' in ans :
                 ans = ans.replace("type<","")
@@ -151,37 +149,11 @@ def main_code():
             Jarvis.say(ans)
             Jarvis.runAndWait()
         elif 'go to' in ans:
-            Jarvis.say("searching......")
-            Jarvis.runAndWait()
-            ans = ans.replace("go to ","")
-            xyz = ("Enter some thing like ('.com','.io','.in'etc):")
-            Jarvis.say(xyz)
-            Jarvis.runAndWait()
-            some = input("Enter some thing like ('.com','.io','.in'etc):")
-            key = (f"https://www.{ans}{some}")
-            webbrowser.open(key)
-            Jarvis.say("Acording to the chrome this is what i found !!")
-            Jarvis.runAndWait()
-            input("Press enter to continue :")
+            Command.Go_To()
         elif 'play' in ans and 'song' in ans:
-            Jarvis.say("searching......")
-            Jarvis.runAndWait()
-            ans = ans.replace("play","")
-            ans = ans.replace("song","")
-            key = (f"https://www.youtube.com/results?search_query={ans}+song")
-            webbrowser.open(key)
-            Jarvis.say("Acording to the youtube this is what i found !!")
-            Jarvis.runAndWait()
-            input("Press enter to continue :")
+            Command.Play_Song()
         elif 'search' in ans:
-            Jarvis.say("searching......")
-            Jarvis.runAndWait()
-            ans = ans.replace("search","")
-            key = (f"https://www.google.com/search?q={ans}")
-            webbrowser.open(key)
-            Jarvis.say("Acording to the net this is what i found !!")
-            Jarvis.runAndWait()
-            input("Press enter to continue :")
+            Command.Search()
         elif 'change voice' in ans :
             Command.Change_voice()
         elif 'time' in ans:
@@ -196,8 +168,6 @@ def main_code():
             webbrowser.open("youtube.com")
         elif 'open google' in ans :
             webbrowser.open("google.com")
-        elif 'open' in ans:
-            Command.Open()
         elif 'math' in ans:
             Jarvis.say("Ok Loading operators . . Compiling code . . Done !!! ")
             Jarvis.runAndWait()
@@ -209,62 +179,12 @@ def main_code():
             jokes = random.choice(joke)
             Jarvis.say(jokes)
             Jarvis.runAndWait()
-        elif 'history' in ans:
-            print(history)
         elif 'riddle' in ans:
             io = 1
             jokes = random.choice(riddles)
             Jarvis.say(jokes)
             Jarvis.runAndWait()
-        elif 'ppt' in ans :
-            ppt = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
-            os.startfile(ppt)
-        elif 'python' in ans:
-            Jarvis.say("Which python code do you want to open ?")
-            Jarvis.runAndWait()
-            py = int(input("1 IDLE 3.7 - 32 bit\n2 3.7 - 32 bit\n3 Doc's 3.7 - 32 bit\n4 IDLE 3.6 - 32 bit\n5 3.6 - 32 bit\n6 Doc's 3.6 - 32 bit\n<^-^> "))
-            if py == 1:              
-                py1 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
-                os.startfile(py1)
-            elif py == 2:
-                py2 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
-                os.startfile(py2)
-            elif py == 3:
-                py3 = "C:\\Users\\rushil\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe -m pydoc -b"
-                os.startfile(py3)
-            elif py == 4:
-                py4 = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe" 
-                os.startfile(py4)
-            elif py == 5:
-                py5 = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe" 
-                os.startfile(py5)
-        elif 'open chrome' in ans:
-            chrome = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-            os.startfile(chrome)
         elif 'image.open<' in ans and '>' in ans :
-            ans=ans.replace('image.open<','')   
-            ans=ans.replace('>','')
-            Jarvis.say("OK this might take a few moments")
-            Jarvis.runAndWait()
-            try :
-                root = Tk()
-                image_name = PhotoImage(file=ans)
-                Button(root,image=image_name).pack()
-                root.mainloop()
-            except Exception as e :
-                Jarvis.say(e)
-                Jarvis.runAndWait()
+            Command.Image_Open()
         else:   
-            Jarvis.say("invalid command")
-            Jarvis.runAndWait()
-            print("Sorry i can not do that")
-            Jarvis.say("Should i search this on the net ?")
-            Jarvis.runAndWait()
-            y_n = input("{y/n} : ")
-            if y_n == "y":
-                key = (f"https://www.google.com/search?q={ans}")
-                webbrowser.open(key)
-                Jarvis.say(" Ok.. Acording to the net this is what i found !!")
-                Jarvis.runAndWait()
-            else:
-                h=1
+            Command.Invalid()
