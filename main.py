@@ -8,15 +8,28 @@ import webbrowser
 import wikipedia
 import sqlite3
 import random
+import random
 import smtplib
 import Command
 import pyttsx3 as pyt
 import Alexa
 import Usernames
+s = ['let us go in my house','how does a bear run','better late than never','the train was late']
+Jarvis = pyt.init()
+Jarvis.say("Make sure it is you OK so this is a test to know whether you are a human or a robot listen crefully and type the sentence")
+Jarvis.runAndWait()
+asd = random.choice(s)
+Jarvis.say(asd)
+Jarvis.runAndWait()
+r = input('Enter : ')
+if r == asd:
+    print('Correct')
+else:
+    print('wrong')
+    sys.exit(0)
 conn = sqlite3.connect('username.db')
 c = conn.cursor()
 c.execute('')
-Jarvis = pyt.init()
 Jarvis.say("Hello There , . I will guide you in the email login process , Please wait till we load your screen . . . .")
 Jarvis.runAndWait()
 root = Tk()
