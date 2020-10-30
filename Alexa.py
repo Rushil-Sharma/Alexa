@@ -11,6 +11,7 @@ import Command
 import pyttsx3 as pyt
 import jarvis
 import Usernames
+k = 1
 def main_code():
     joke=[
         """1 ...... What do you call a dinosaur that is sleeping? , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
@@ -155,7 +156,11 @@ def main_code():
         elif 'search' in ans:
             Command.Search()
         elif 'change voice' in ans :
-            Command.Change_voice()
+            voices = Jarvis.getProperty('voices')
+            try:
+                Jarvis.setProperty('voice', voices[1].id)
+            except:
+                Jarvis.setProperty('voice', voices[0].id) 
         elif 'time' in ans:
             time_now = time.strftime("%H:%M:%S")
             Jarvis.say(time_now)
@@ -187,4 +192,4 @@ def main_code():
         elif 'image.open<' in ans and '>' in ans :
             Command.Image_Open()
         else:   
-            Command.Invalid()
+            print('INVALID')
