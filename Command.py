@@ -10,7 +10,6 @@ import smtplib
 import Command
 import pyttsx3 as pyt
 import Alexa
-import Usernames
 Jarvis = pyt.init()
 def Quit():
     Jarvis.say("For saftey we will clear the screen")
