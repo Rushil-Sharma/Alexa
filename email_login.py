@@ -14,7 +14,6 @@ import smtplib
 import Command
 import pyttsx3 as pyt
 import Alexa
-import Usernames
 s = ['let us go in my house','how does a bear run','better late than never','the train was late']
 Jarvis = pyt.init()
 Jarvis.say("Make sure it is you OK so this is a test to know whether you are a human or a robot listen carefully and type the sentence")
