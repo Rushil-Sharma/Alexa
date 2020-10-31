@@ -9,8 +9,6 @@ import random
 import smtplib
 import Command
 import pyttsx3 as pyt
-import jarvis
-import Usernames
 k = 1
 def main_code():
     joke=[
